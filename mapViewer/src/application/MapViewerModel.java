@@ -64,7 +64,7 @@ public class MapViewerModel {
 			
 			if (temp_axe[0]!=0 && temp_axe[1]!=0)
 			{
-				ClearPreviousAxe (grid,temp_boat[0],temp_boat[1]);
+				ClearPreviousAxe (grid,temp_axe[0],temp_axe[1]);
 			}
 			drawAxe(grid,row,col,0);
 			temp_axe[0]=row;
