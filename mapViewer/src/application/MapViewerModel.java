@@ -64,9 +64,9 @@ public class MapViewerModel {
 			
 			if (temp_axe[0]!=0 && temp_axe[1]!=0)
 			{
-				ClearPreviousAxe (grid,row,col);
+				ClearPreviousAxe (grid,temp_boat[0],temp_boat[1]);
 			}
-			drawAxe(grid,row,col);
+			drawAxe(grid,row,col,0);
 			temp_axe[0]=row;
 			temp_axe[1]=col;
 			
@@ -101,9 +101,9 @@ public class MapViewerModel {
 			//IF TEMP!=0,THEN CLEAR LAST
 			if (temp_boat[0]!=0 && temp_boat[1]!=0)
 			{
-				ClearPreviousBoat (grid,row,col);
+				ClearPreviousBoat (grid,temp_boat[0],temp_boat[1]);
 			}
-			drawBoat(grid,row,col);
+			drawBoat(grid,row,col,0);
 			temp_boat[0]=row;
 			temp_boat[1]=col;
 			
@@ -147,19 +147,27 @@ public class MapViewerModel {
         }
 	}
 
-	public static void drawAxe(GridPane grid,int row,int col) {
+	public static void drawAxe(GridPane grid,int row,int col,int clear) {
 		ImageView axe_tile = new ImageView();
 		grid.add(axe_tile, col, row);
         Image axeImg = SwingFXUtils.toFXImage(content.ITEMS[1][1], null);
         axe_tile.setImage(axeImg);
+        if (clear==1)
+        {
+        	axe_tile.setImage(null);
+        }
 	}
 	
 	
-	public static void drawBoat(GridPane grid,int row,int col) {
+	public static void drawBoat(GridPane grid,int row,int col,int clear) {
 		ImageView boat_tile = new ImageView();
 		grid.add(boat_tile, col, row);
-        Image boatImg = SwingFXUtils.toFXImage(content.ITEMS[1][1], null);
+        Image boatImg = SwingFXUtils.toFXImage(content.ITEMS[1][0], null);
         boat_tile.setImage(boatImg);
+        if (clear==1)
+        {
+        	boat_tile.setImage(null);
+        }
 	}
 	
 	
@@ -168,17 +176,19 @@ public class MapViewerModel {
 		alert.setTitle("Message");
 		alert.setHeaderText(null);
 		alert.setContentText(Message);
-
 		alert.showAndWait();
 	}
 	
 	public void ClearPreviousAxe (GridPane grid, int row, int col)
 	{
+		
+		drawAxe (grid,row,col,1);
 		tileMap.GenerateTileImage(grid, row, col);
 	}
 	
 	public void ClearPreviousBoat (GridPane grid, int row, int col)
 	{
+		drawBoat (grid,row,col,1);
 		tileMap.GenerateTileImage(grid, row, col);
 	}
 	
