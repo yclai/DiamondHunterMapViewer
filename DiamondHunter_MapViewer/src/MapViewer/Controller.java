@@ -31,8 +31,11 @@ public class Controller {
 
     
     public void playBtnClicked(){
-    
-            Game.runGame();
+    	if( (boatSet==0 && axeSet==0) || (boatSet==1 && axeSet==0)  || (boatSet==0 && axeSet==1)  ) {
+           model.ShowMessage("Please set boat and axe");
                 
+    	}else {
+    	 Game.runGame();
+    	}
     }
 }
