@@ -58,7 +58,7 @@ public class MapViewerModel {
 		grid.add(pane, col, row);
 		
 		pane.setOnMouseClicked(e->{
-			WritePositionToFile ("../map/bin/setting/Axe.txt",col,row);
+			WritePositionToFile ("../mapViewer/bin/setting/Axe.txt",col,row);
 			
 			//DrawAxe(grid,col,row);
 			temp_axe[0]=row;
@@ -91,7 +91,7 @@ public class MapViewerModel {
 		grid.add(pane, col, row);
 		
 		pane.setOnMouseClicked(e->{
-			WritePositionToFile ("../map/bin/setting/Boat.txt",col,row);
+			WritePositionToFile ("../mapViewer/bin/setting/Boat.txt",col,row);
 			
 			//DrawBoat(grid,col,row);
 			temp_boat[0]=row;

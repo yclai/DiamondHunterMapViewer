@@ -6,11 +6,7 @@ import javafx.scene.layout.GridPane;
 public class Controller {
 	MapViewerModel model = new MapViewerModel();
 	TileMapMV tilemap = new TileMapMV(16);
-    public void boatBtnClicked(){
-        System.out.println("testing");
-       // setBoat(); /*   to set boat on map when button clicked      */
-    }
-
+   
 
     
     
@@ -28,4 +24,9 @@ public class Controller {
         model.AxeCaptureMouseClick(grid); /*   to set axe on map when button clicked      */
     }
     
+    public void boatBtnClicked(){
+        System.out.println("testing");
+        model.BoatCaptureMouseClick(grid);
+    }
+
 }
