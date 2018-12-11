@@ -1,8 +1,12 @@
 package application;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+
 
 import java.io.File;
 import java.io.BufferedWriter;
@@ -20,11 +24,9 @@ public class MapViewerModel {
 	// save the temporary position
 	int[] temp_axe = new int[2];
 	int[] temp_boat = new int[2];
-
 	TileMapMV tileMap = new TileMapMV(16);
-
+	
 	public void loadMap(GridPane grid) {
-
 			tileMap.loadTiles("/Tilesets/testtileset.gif");
 			tileMap.loadMap("/Maps/testmap.map");
 			map = tileMap.getMap();
@@ -60,7 +62,11 @@ public class MapViewerModel {
 		pane.setOnMouseClicked(e->{
 			WritePositionToFile ("../mapViewer/bin/application/Axe.txt",col,row);
 			
-			//DrawAxe(grid,col,row);
+			if (temp_axe[0]!=0 && temp_axe[1]!=0)
+			{
+				ClearPreviousAxe (grid,row,col);
+			}
+			drawAxe(grid,row,col);
 			temp_axe[0]=row;
 			temp_axe[1]=col;
 			
@@ -92,8 +98,12 @@ public class MapViewerModel {
 		
 		pane.setOnMouseClicked(e->{
 			WritePositionToFile ("../mapViewer/bin/application/Boat.txt",col,row);
-			
-			//DrawBoat(grid,col,row);
+			//IF TEMP!=0,THEN CLEAR LAST
+			if (temp_boat[0]!=0 && temp_boat[1]!=0)
+			{
+				ClearPreviousBoat (grid,row,col);
+			}
+			drawBoat(grid,row,col);
 			temp_boat[0]=row;
 			temp_boat[1]=col;
 			
@@ -136,6 +146,22 @@ public class MapViewerModel {
             System.out.println(e);
         }
 	}
+
+	public static void drawAxe(GridPane grid,int row,int col) {
+		ImageView axe_tile = new ImageView();
+		grid.add(axe_tile, col, row);
+        Image axeImg = SwingFXUtils.toFXImage(content.ITEMS[1][1], null);
+        axe_tile.setImage(axeImg);
+	}
+	
+	
+	public static void drawBoat(GridPane grid,int row,int col) {
+		ImageView boat_tile = new ImageView();
+		grid.add(boat_tile, col, row);
+        Image boatImg = SwingFXUtils.toFXImage(content.ITEMS[1][1], null);
+        boat_tile.setImage(boatImg);
+	}
+	
 	
 	public static void ShowMessage(String Message){
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -146,6 +172,16 @@ public class MapViewerModel {
 		alert.showAndWait();
 	}
 	
-	//ClearPreviousAxe 
+	public void ClearPreviousAxe (GridPane grid, int row, int col)
+	{
+		tileMap.GenerateTileImage(grid, row, col);
+	}
+	
+	public void ClearPreviousBoat (GridPane grid, int row, int col)
+	{
+		tileMap.GenerateTileImage(grid, row, col);
+	}
+	
+	
 }
 
