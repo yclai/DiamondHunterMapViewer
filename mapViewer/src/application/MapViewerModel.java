@@ -58,7 +58,7 @@ public class MapViewerModel {
 		grid.add(pane, col, row);
 		
 		pane.setOnMouseClicked(e->{
-			WritePositionToFile ("../mapViewer/bin/setting/Axe.txt",col,row);
+			WritePositionToFile ("../mapViewer/bin/application/Axe.txt",col,row);
 			
 			//DrawAxe(grid,col,row);
 			temp_axe[0]=row;
@@ -91,7 +91,7 @@ public class MapViewerModel {
 		grid.add(pane, col, row);
 		
 		pane.setOnMouseClicked(e->{
-			WritePositionToFile ("../mapViewer/bin/setting/Boat.txt",col,row);
+			WritePositionToFile ("../mapViewer/bin/application/Boat.txt",col,row);
 			
 			//DrawBoat(grid,col,row);
 			temp_boat[0]=row;
@@ -136,6 +136,7 @@ public class MapViewerModel {
             System.out.println(e);
         }
 	}
+	
 	public static void ShowMessage(String Message){
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Message");
@@ -143,7 +144,8 @@ public class MapViewerModel {
 		alert.setContentText(Message);
 
 		alert.showAndWait();
-		}
-
 	}
+	
+	//ClearPreviousAxe 
+}
 
