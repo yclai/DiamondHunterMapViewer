@@ -8,11 +8,9 @@ import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
 
 import javafx.embed.swing.SwingFXUtils;
-import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 
 public class TileMapMV {
 
@@ -97,12 +95,9 @@ public class TileMapMV {
 	}
 	
 	public void GenerateTileImage (GridPane grid, int row, int col) {
-		//HBox tileField = new HBox();
-		//tileField.setAlignment(Pos.CENTER);
 	
 		ImageView PTile = new ImageView();
 		grid.add(PTile, col, row);
-		//tileField.getChildren().add(PTile);
 		int rc = map[row][col];
 		int r = rc / numTilesAcross;
 		int c = rc % numTilesAcross;
