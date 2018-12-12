@@ -12,6 +12,8 @@ import java.io.File;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
+import com.neet.DiamondHunter.Entity.Diamond;
+
 import MapViewer.TileMapMV;
 import javafx.scene.layout.Pane;
 
@@ -179,8 +181,41 @@ public class MapViewerModel {
         	boat_tile.setImage(null);
         }
 	}
+	public static void drawPlayer (GridPane grid)
+	{
+		ImageView player_tile = new ImageView();
+		grid.add(player_tile, 17, 17);
+		Image playerImage = SwingFXUtils.toFXImage(content.PLAYER[0][0], null);
+		player_tile.setImage(playerImage);
+	}
 	
+	public static void drawDiamond (GridPane grid,int row,int col)
+	{
+		ImageView diamond_tile = new ImageView();
+		grid.add(diamond_tile, col, row);
+		Image diamondImage = SwingFXUtils.toFXImage(content.DIAMOND[0][0], null);
+		diamond_tile.setImage(diamondImage);
+	}
 	
+	public static void populateDiamond (GridPane grid)
+	{
+
+		drawDiamond(grid,20, 20);
+		drawDiamond(grid,12, 36);
+		drawDiamond(grid,28, 4);
+		drawDiamond(grid,4, 34);
+		drawDiamond(grid,28, 19);
+		drawDiamond(grid,35, 26);
+		drawDiamond(grid,38, 36);
+		drawDiamond(grid,27, 28);
+		drawDiamond(grid,20, 30);
+		drawDiamond(grid,14, 25);
+		drawDiamond(grid,4, 21);
+		drawDiamond(grid,9, 14);
+		drawDiamond(grid,4, 3);
+		drawDiamond(grid,20, 14);
+		drawDiamond(grid,13, 20);
+	}
 	public static void ShowMessage(String Message){
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Message");

@@ -18,6 +18,8 @@ public class Controller {
     @FXML
     public void initialize() {
 		model.loadMap(grid);
+		MapViewerModel.drawPlayer(grid);
+		MapViewerModel.populateDiamond(grid);
 }
     public void axeBtnClicked(){
         model.AxeCaptureMouseClick(grid); /*   to set axe on map when button clicked      */

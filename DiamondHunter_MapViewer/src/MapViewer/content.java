@@ -11,6 +11,8 @@ import javax.imageio.ImageIO;
 public class content {
 
 	public static BufferedImage[][] ITEMS = load("/Sprites/items.gif", 16, 16);
+	public static BufferedImage[][] PLAYER = load("/Sprites/playersprites.gif", 16, 16);
+	public static BufferedImage[][] DIAMOND = load("/Sprites/diamond.gif", 16, 16);
 	public static BufferedImage[][] load(String s, int w, int h) {
 		BufferedImage[][] ret;
 		try {
