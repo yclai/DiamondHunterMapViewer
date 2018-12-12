@@ -67,10 +67,14 @@ public class MapViewerModel {
 			{
 				ClearPreviousAxe (grid,temp_axe[0],temp_axe[1]);
 			}
-			drawAxe(grid,row,col,0);
 			temp_axe[0]=row;
 			temp_axe[1]=col;
-			
+			if (temp_boat [0]==temp_axe[0] && temp_boat[1]==temp_axe[1])
+			{
+				ClearPreviousBoat (grid,temp_boat[0],temp_boat[1]);
+				Controller.boatSet=0;
+			}
+			drawAxe(grid,row,col,0);
 			ShowMessage ("Successfully set axe!");
 			
 		}	
@@ -104,9 +108,14 @@ public class MapViewerModel {
 			{
 				ClearPreviousBoat (grid,temp_boat[0],temp_boat[1]);
 			}
-			drawBoat(grid,row,col,0);
 			temp_boat[0]=row;
 			temp_boat[1]=col;
+			if (temp_boat [0]==temp_axe[0] && temp_boat[1]==temp_axe[1])
+			{
+				ClearPreviousAxe (grid,temp_axe[0],temp_axe[1]);
+				Controller.axeSet=0;
+			}
+				drawBoat(grid,row,col,0);
 			
 			ShowMessage ("Successfully set Boat!");
 			
