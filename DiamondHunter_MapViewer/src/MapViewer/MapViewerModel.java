@@ -12,8 +12,6 @@ import java.io.File;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
-import com.neet.DiamondHunter.Entity.Diamond;
-
 import MapViewer.TileMapMV;
 import javafx.scene.layout.Pane;
 
@@ -47,12 +45,14 @@ public class MapViewerModel {
 		//first, set pane on every grid that can place axe
 		for (int row = 0; row < ROWNUM; row++) {
 			for (int col = 0; col < COLNUM; col++) {
-				
-				if (map[row][col]==1 ||map[row][col]==2||map[row][col]==3)
-				PaneAxeClickEffect (grid, row, col);
+			
+				if (isDiamondOrPlayer(row,col)==true)
+					ShowWarningForNonGrassPane (grid,"Do not put item on diamond/player",row,col);
+				else if (map[row][col]==1 ||map[row][col]==2||map[row][col]==3)
+					PaneAxeClickEffect (grid, row, col); 
 				else
 				//else set pane to show warning when clicked
-				ShowWarningForNonGrassPane (grid,"You can only put item on grass.",row,col);
+					ShowWarningForNonGrassPane (grid,"You can only put item on grass.",row,col);
 			}
 	}
 	}
@@ -89,11 +89,13 @@ public class MapViewerModel {
 		for (int row = 0; row < ROWNUM; row++) {
 			for (int col = 0; col < COLNUM; col++) {
 				
-				if (map[row][col]==1 ||map[row][col]==2||map[row][col]==3)
-				PaneBoatClickEffect (grid, row, col);
+				if (isDiamondOrPlayer(row,col)==true)
+					ShowWarningForNonGrassPane (grid,"Do not put item on diamond/player",row,col);
+				else if (map[row][col]==1 ||map[row][col]==2||map[row][col]==3)
+					PaneBoatClickEffect (grid, row, col);
 				else
 				//else set pane to show warning when clicked
-				ShowWarningForNonGrassPane (grid,"You can only put item on grass.",row,col);
+					ShowWarningForNonGrassPane (grid,"You can only put item on grass.",row,col);
 			}
 	}
 	}
@@ -226,7 +228,6 @@ public class MapViewerModel {
 	
 	public void ClearPreviousAxe (GridPane grid, int row, int col)
 	{
-		
 		drawAxe (grid,row,col,1);
 		tileMap.GenerateTileImage(grid, row, col);
 	}
@@ -237,6 +238,44 @@ public class MapViewerModel {
 		tileMap.GenerateTileImage(grid, row, col);
 	}
 	
+	public boolean isDiamondOrPlayer (int row, int col)
+	{
+		if (row==20&&col==20)
+			return true;
+		if (row==12&&col==36)
+			return true;
+		if (row==28&&col==4)
+			return true;
+		if (row==4&&col==34)
+			return true;
+		if (row==28&&col==19)
+			return true;
+		if (row==35&&col==26)
+			return true;
+		if (row==38&&col==36)
+			return true;
+		if (row==27&&col==28)
+			return true;
+		if (row==20&&col==30)
+			return true;
+		if (row==14&&col==25)
+			return true;
+		if (row==4&&col==21)
+			return true;
+		if (row==9&&col==14)
+			return true;
+		if (row==4&&col==3)
+			return true;
+		if (row==20&&col==14)
+			return true;
+		if (row==13&&col==20)
+			return true;
+		if (row==20&&col==20)
+			return true;
+		if (row==17&&col==17)
+			return true;
+		return false;	
+	}
 	
 }
 
