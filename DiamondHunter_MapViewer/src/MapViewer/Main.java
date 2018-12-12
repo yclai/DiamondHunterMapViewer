@@ -14,16 +14,13 @@ public class Main extends Application {
 
 	private AnchorPane root;
 
-	/**
-	 * start() will launch game when play button clicked
-	 */
-	
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();//fxml variable
 			loader.setLocation(Main.class.getResource("mapViewer.fxml"));
 			root = (AnchorPane) loader.load();
 			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setResizable(false);
 			primaryStage.setScene(scene);
 			primaryStage.show();

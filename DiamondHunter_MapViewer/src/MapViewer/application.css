@@ -1,1 +1,18 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+.root{
+	-fx-font-size:20px;
+}
+
+
+.button{
+	
+	-fx-background-color:#000000;
+	-fx-text-fill:#FFFFFF;
+	-fx-background-radius:30;
+	-fx-cursor: hand;
+	-fx-padding:18px;
+	-fx-alignment: center;
+	-fx-font-weight: bold;
+	-fx-font-family: "Time New Roman";}
+
