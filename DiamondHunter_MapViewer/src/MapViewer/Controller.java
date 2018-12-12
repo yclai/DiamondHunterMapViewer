@@ -23,12 +23,10 @@ public class Controller {
 }
     public void axeBtnClicked(){
         model.AxeCaptureMouseClick(grid); /*   to set axe on map when button clicked      */
-        axeSet=1;
     }
     
     public void boatBtnClicked(){
         model.BoatCaptureMouseClick(grid);
-        boatSet=1;
         
     }
 

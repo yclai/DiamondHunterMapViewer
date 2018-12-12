@@ -20,7 +20,6 @@ import javafx.scene.layout.Pane;
 public class MapViewerModel {
 	int COLNUM = 40;
 	int ROWNUM = 40;
-
 	// save map in this array
 	int[][] map;
 
@@ -63,6 +62,7 @@ public class MapViewerModel {
 		grid.add(pane, col, row);
 		
 		pane.setOnMouseClicked(e->{
+			Controller.axeSet=1;
 			WritePositionToFile ("../DiamondHunter_MapViewer/bin/Maps/Axe.txt",col,row);
 			
 			if (temp_axe[0]!=0 && temp_axe[1]!=0)
@@ -104,6 +104,7 @@ public class MapViewerModel {
 		grid.add(pane, col, row);
 		
 		pane.setOnMouseClicked(e->{
+			Controller.boatSet=1;
 			WritePositionToFile ("../DiamondHunter_MapViewer/bin/Maps/Boat.txt",col,row);
 			//IF TEMP!=0,THEN CLEAR LAST
 			if (temp_boat[0]!=0 && temp_boat[1]!=0)
