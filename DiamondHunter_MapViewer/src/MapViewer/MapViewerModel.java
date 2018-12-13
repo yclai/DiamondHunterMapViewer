@@ -1,11 +1,11 @@
 package MapViewer;
 
-import javafx.embed.swing.SwingFXUtils;
+import MapViewer.Drawing;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+
+
 import java.io.File;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -23,6 +23,7 @@ public class MapViewerModel {
 	// save the temporary position
 	int[] temp_axe = new int[2];
 	int[] temp_boat = new int[2];
+	Drawing Draw = new Drawing();
 	TileMapMV tileMap = new TileMapMV(16);
 	
 	public void loadMap(GridPane grid) {
@@ -44,12 +45,13 @@ public class MapViewerModel {
 		for (int row = 0; row < ROWNUM; row++) {
 			for (int col = 0; col < COLNUM; col++) {
 			
+				//show warning when clicked on player or diamond
 				if (isDiamondOrPlayer(row,col)==true)
 					ShowWarningForNonGrassPane (grid,"Do not put item on diamond/player",row,col);
 				else if (map[row][col]==1 ||map[row][col]==2||map[row][col]==3)
 					PaneAxeClickEffect (grid, row, col); 
 				else
-				//else set pane to show warning when clicked
+				//show warning when clicked on non-grass pane
 					ShowWarningForNonGrassPane (grid,"You can only put item on grass.",row,col);
 			}
 	}
@@ -59,22 +61,25 @@ public class MapViewerModel {
 	{
 		Pane pane= new Pane();
 		grid.add(pane, col, row);
-		
+		//when that pane is clicked to set axe
 		pane.setOnMouseClicked(e->{
+			Controller.axeSet=1;
 			WritePositionToFile ("../DiamondHunter_MapViewer/bin/Maps/Axe.txt",col,row);
 			
+			//if axe is previously placed before, clear the previous one
 			if (temp_axe[0]!=0 && temp_axe[1]!=0)
 			{
 				ClearPreviousAxe (grid,temp_axe[0],temp_axe[1]);
 			}
 			temp_axe[0]=row;
 			temp_axe[1]=col;
+			//if axe is placed on a boat, replace boat with the axe
 			if (temp_boat [0]==temp_axe[0] && temp_boat[1]==temp_axe[1])
 			{
 				ClearPreviousBoat (grid,temp_boat[0],temp_boat[1]);
 				Controller.boatSet=0;
 			}
-			drawAxe(grid,row,col,0);
+			Draw.drawAxe(grid,row,col,0);
 			ShowMessage ("Successfully set axe!");
 			
 		}	
@@ -83,29 +88,32 @@ public class MapViewerModel {
 	}
 	public void BoatCaptureMouseClick (GridPane grid)
 	{
-		//first, set pane on every grid that can place axe
+		//set pane on every grid that can place boat
 		for (int row = 0; row < ROWNUM; row++) {
 			for (int col = 0; col < COLNUM; col++) {
 				
+				//show warning when clicked on a player or diamond
 				if (isDiamondOrPlayer(row,col)==true)
 					ShowWarningForNonGrassPane (grid,"Do not put item on diamond/player",row,col);
 				else if (map[row][col]==1 ||map[row][col]==2||map[row][col]==3)
 					PaneBoatClickEffect (grid, row, col);
 				else
-				//else set pane to show warning when clicked
+				//show warning when clicked on a non-grass grid
 					ShowWarningForNonGrassPane (grid,"You can only put item on grass.",row,col);
 			}
 	}
 	}
-		
+	
+	//same method with that of axe
 	public void PaneBoatClickEffect (GridPane grid,int row,int col)
 	{
 		Pane pane= new Pane();
 		grid.add(pane, col, row);
 		
 		pane.setOnMouseClicked(e->{
+			Controller.boatSet=1;
 			WritePositionToFile ("../DiamondHunter_MapViewer/bin/Maps/Boat.txt",col,row);
-			//IF TEMP!=0,THEN CLEAR LAST
+
 			if (temp_boat[0]!=0 && temp_boat[1]!=0)
 			{
 				ClearPreviousBoat (grid,temp_boat[0],temp_boat[1]);
@@ -117,7 +125,7 @@ public class MapViewerModel {
 				ClearPreviousAxe (grid,temp_axe[0],temp_axe[1]);
 				Controller.axeSet=0;
 			}
-				drawBoat(grid,row,col,0);
+				Draw.drawBoat(grid,row,col,0);
 			
 			ShowMessage ("Successfully set Boat!");
 			
@@ -126,6 +134,8 @@ public class MapViewerModel {
 		
 	}
 	
+	//show warning message when clicked on a pane that is 
+	//not supposed to be clicked on. 
 	public void ShowWarningForNonGrassPane (GridPane grid,String message,int row, int col){
 		Pane pane = new Pane();
 		grid.add (pane,col,row);
@@ -135,6 +145,7 @@ public class MapViewerModel {
 		});
 	}
 	
+	//writing the column and row index into a txt file.
 	public void WritePositionToFile(String path, int row, int col)
 	{
 		try{
@@ -159,63 +170,7 @@ public class MapViewerModel {
         }
 	}
 
-	public static void drawAxe(GridPane grid,int row,int col,int clear) {
-		ImageView axe_tile = new ImageView();
-		grid.add(axe_tile, col, row);
-        Image axeImg = SwingFXUtils.toFXImage(content.ITEMS[1][1], null);
-        axe_tile.setImage(axeImg);
-        if (clear==1)
-        {
-        	axe_tile.setImage(null);
-        }
-	}
-	
-	
-	public static void drawBoat(GridPane grid,int row,int col,int clear) {
-		ImageView boat_tile = new ImageView();
-		grid.add(boat_tile, col, row);
-        Image boatImg = SwingFXUtils.toFXImage(content.ITEMS[1][0], null);
-        boat_tile.setImage(boatImg);
-        if (clear==1)
-        {
-        	boat_tile.setImage(null);
-        }
-	}
-	public static void drawPlayer (GridPane grid)
-	{
-		ImageView player_tile = new ImageView();
-		grid.add(player_tile, 17, 17);
-		Image playerImage = SwingFXUtils.toFXImage(content.PLAYER[0][0], null);
-		player_tile.setImage(playerImage);
-	}
-	
-	public static void drawDiamond (GridPane grid,int row,int col)
-	{
-		ImageView diamond_tile = new ImageView();
-		grid.add(diamond_tile, col, row);
-		Image diamondImage = SwingFXUtils.toFXImage(content.DIAMOND[0][0], null);
-		diamond_tile.setImage(diamondImage);
-	}
-	
-	public static void populateDiamond (GridPane grid)
-	{
-
-		drawDiamond(grid,20, 20);
-		drawDiamond(grid,12, 36);
-		drawDiamond(grid,28, 4);
-		drawDiamond(grid,4, 34);
-		drawDiamond(grid,28, 19);
-		drawDiamond(grid,35, 26);
-		drawDiamond(grid,38, 36);
-		drawDiamond(grid,27, 28);
-		drawDiamond(grid,20, 30);
-		drawDiamond(grid,14, 25);
-		drawDiamond(grid,4, 21);
-		drawDiamond(grid,9, 14);
-		drawDiamond(grid,4, 3);
-		drawDiamond(grid,20, 14);
-		drawDiamond(grid,13, 20);
-	}
+	//a method to show alert message
 	public static void ShowMessage(String Message){
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Message");
@@ -226,16 +181,19 @@ public class MapViewerModel {
 	
 	public void ClearPreviousAxe (GridPane grid, int row, int col)
 	{
-		drawAxe (grid,row,col,1);
+		//clear an axe then redraw that tile.
+		Draw.drawAxe (grid,row,col,1);
 		tileMap.GenerateTileImage(grid, row, col);
 	}
 	
 	public void ClearPreviousBoat (GridPane grid, int row, int col)
 	{
-		drawBoat (grid,row,col,1);
+		//clear a boat then redraw that tile.
+		Draw.drawBoat (grid,row,col,1);
 		tileMap.GenerateTileImage(grid, row, col);
 	}
 	
+	//check whether that location has player or diamond
 	public boolean isDiamondOrPlayer (int row, int col)
 	{
 		if (row==20&&col==20)

@@ -1,7 +1,8 @@
-// Loads and splits all sprites on start up.
-// The sprites can easily be accessed as they
-// are public and static.
-
+/**Loads and splits all sprites on start up.
+  *The sprites can easily be accessed as they
+  *are public and static.
+  *@author zc
+  */
 package MapViewer;
 
 import java.awt.image.BufferedImage;
