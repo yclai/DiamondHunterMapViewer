@@ -78,7 +78,17 @@ public class PlayState extends GameState {
 		
 		// fill lists
 		populateDiamonds();
+		if (axe[0]==0 && axe[1]==0)
+		{
+			axe[0]=26;
+			axe[1]=37;
+		}
 		populateAxe();
+		if (boat[0]==0 && boat[1]==0)
+		{
+			boat[0]=12;
+			boat[1]=4;
+		}
 		populateBoat();
 		
 		// initialize player
