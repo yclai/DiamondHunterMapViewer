@@ -94,6 +94,8 @@ public class TileMapMV {
 		
 	}
 	
+	//draw the image that is supposed to draw on that tile
+	//using variable map[][].
 	public void GenerateTileImage (GridPane grid, int row, int col) {
 	
 		ImageView PTile = new ImageView();

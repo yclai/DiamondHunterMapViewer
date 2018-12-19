@@ -7,9 +7,6 @@ package com.neet.DiamondHunter.GameState;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import com.neet.DiamondHunter.Entity.Diamond;
@@ -26,6 +23,8 @@ import com.neet.DiamondHunter.TileMap.TileMap;
 
 public class PlayState extends GameState {
 	
+	public static int[] axe = new int[2];
+	public static int[] boat = new int[2];
 	// player
 	private Player player;
 	
@@ -176,12 +175,9 @@ public class PlayState extends GameState {
 	private void populateAxe() {
 		try {
 		Item item;
-		InputStream in = getClass().getResourceAsStream("/Maps/Axe.txt");
-		BufferedReader br = new BufferedReader(new InputStreamReader(in));
-
 		item = new Item(tileMap);
 		item.setType(Item.AXE);
-		item.setTilePosition(Integer.parseInt(br.readLine()),Integer.parseInt(br.readLine()));
+		item.setTilePosition(axe[0],axe[1]);
 		items.add(item);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -190,12 +186,9 @@ public class PlayState extends GameState {
 	private void populateBoat() {
 		try {
 		Item item;
-		InputStream in = getClass().getResourceAsStream("/Maps/Boat.txt");
-		BufferedReader br = new BufferedReader(new InputStreamReader(in));
-
 		item = new Item(tileMap);
 		item.setType(Item.BOAT);
-		item.setTilePosition(Integer.parseInt(br.readLine()),Integer.parseInt(br.readLine()));
+		item.setTilePosition(boat[0],boat[1]);
 		items.add(item);
 		} catch (Exception e) {
 			e.printStackTrace();

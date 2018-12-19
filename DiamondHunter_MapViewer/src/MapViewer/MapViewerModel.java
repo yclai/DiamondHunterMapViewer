@@ -4,8 +4,7 @@ import MapViewer.Drawing;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
-
-
+import com.neet.DiamondHunter.GameState.PlayState;
 import java.io.File;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -64,8 +63,9 @@ public class MapViewerModel {
 		//when that pane is clicked to set axe
 		pane.setOnMouseClicked(e->{
 			Controller.axeSet=1;
-			WritePositionToFile ("../DiamondHunter_MapViewer/bin/Maps/Axe.txt",col,row);
-			
+			//WritePositionToFile ("../DiamondHunter_MapViewer/bin/Maps/Axe.txt",col,row);
+			PlayState.axe[0]=row;
+			PlayState.axe[1]=col;
 			//if axe is previously placed before, clear the previous one
 			if (temp_axe[0]!=0 && temp_axe[1]!=0)
 			{
@@ -112,8 +112,11 @@ public class MapViewerModel {
 		
 		pane.setOnMouseClicked(e->{
 			Controller.boatSet=1;
-			WritePositionToFile ("../DiamondHunter_MapViewer/bin/Maps/Boat.txt",col,row);
-
+			//WritePositionToFile ("../DiamondHunter_MapViewer/bin/Maps/Boat.txt",col,row);
+			
+			PlayState.boat[0]=row;
+			PlayState.boat[1]=col;
+			
 			if (temp_boat[0]!=0 && temp_boat[1]!=0)
 			{
 				ClearPreviousBoat (grid,temp_boat[0],temp_boat[1]);

@@ -14,6 +14,7 @@ public class Controller {
 	Drawing Draw = new Drawing();
 	MapViewerModel model = new MapViewerModel();
 	TileMapMV tilemap = new TileMapMV(16);
+	//making sure the user set boat and axe before starting the game.
     public static int boatSet=0;
     public static int axeSet=0;
 
@@ -22,6 +23,7 @@ public class Controller {
     @FXML
     GridPane grid;
     
+    //initialise the controller (draw map, player and diamonds)
     @FXML
     public void initialize() {
 		model.loadMap(grid);
