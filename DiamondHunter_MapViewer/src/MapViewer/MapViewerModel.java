@@ -112,7 +112,6 @@ public class MapViewerModel {
 		
 		pane.setOnMouseClicked(e->{
 			Controller.boatSet=1;
-			//WritePositionToFile ("../DiamondHunter_MapViewer/bin/Maps/Boat.txt",col,row);
 			
 			PlayState.boat[0]=row;
 			PlayState.boat[1]=col;
@@ -146,31 +145,6 @@ public class MapViewerModel {
 		pane.setOnMouseClicked(e->{
 			ShowMessage (message);
 		});
-	}
-	
-	//writing the column and row index into a txt file.
-	public void WritePositionToFile(String path, int row, int col)
-	{
-		try{
-            File file = new File(path);
-
-            // If file doesn't exists, then create it
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-
-            FileWriter fw = new FileWriter(file.getAbsoluteFile());
-            BufferedWriter bw = new BufferedWriter(fw);
-            // Write in file
-            bw.write(Integer.toString(col));
-            bw.newLine();
-            bw.write(Integer.toString(row));
-            // Close connection
-            bw.close(); 
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
 	}
 
 	//a method to show alert message
